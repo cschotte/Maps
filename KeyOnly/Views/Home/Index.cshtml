@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section Stylesheets
+    {
+    <link href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" rel="stylesheet" />
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Azure Maps</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/azure/azure-maps/">building Azure Maps apps with ASP.NET Core</a>.</p>
+    </div>
+
+    <div id="myMap" style="width:100%;min-width:290px;height:600px;"></div>
+
+    @section Scripts
+    {
+    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
+
+    <script>
+        var map;
+
+        //Initialize a map instance.
+        map = new atlas.Map('myMap', {
+            center: [-122.33, 47.6],
+            zoom: 12,
+            style: 'satellite_road_labels',
+            view: 'Auto',
+
+            //Add authentication details for connecting to Azure Maps.
+            authOptions: {
+                //Use Azure Active Directory authentication.
+                //authType: 'anonymous',
+                //clientId: 'e6b6ab59-eb5d-4d25-aa57-581135b927f0', //Your Azure Maps client id for accessing your Azure Maps account.
+                //getToken: function(resolve, reject, map) {
+                //    //URL to your authentication service that retrieves an Azure Active Directory Token.
+                //    var tokenServiceUrl = "https://navatron-maps.azurewebsites.net/api/GetAzureMapsToken";
+
+                //    fetch(tokenServiceUrl).then(r => r.text()).then(token => resolve(token));
+                //}
+
+                //Alternatively, use an Azure Maps key. Get an Azure Maps key at https://azure.com/maps. NOTE: The primary key should be used as the key.
+                authType: 'subscriptionKey',
+                subscriptionKey: '17p2BI_YAgrlTZ0KvJPrxyriiJT7kQKMRXMQY19ZUj4'
+            }
+        });
+
+        //Wait until the map resources are ready.
+        map.events.add('ready', function() {
+            //Add your post map load code here.
+        });
+    </script>
+}
