@@ -3,8 +3,8 @@
 }
 
 @section Stylesheets
-    {
-    <link href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" rel="stylesheet" />
+{
+    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" />
 }
 
     <div class="text-center">
@@ -14,8 +14,8 @@
 
     <div id="myMap" style="width:100%;min-width:290px;height:600px;"></div>
 
-    @section Scripts
-    {
+@section Scripts
+{
     <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
 
     <script>
@@ -35,7 +35,7 @@
                 //clientId: 'e6b6ab59-eb5d-4d25-aa57-581135b927f0', //Your Azure Maps client id for accessing your Azure Maps account.
                 //getToken: function(resolve, reject, map) {
                 //    //URL to your authentication service that retrieves an Azure Active Directory Token.
-                //    var tokenServiceUrl = "https://navatron-maps.azurewebsites.net/api/GetAzureMapsToken";
+                //    var tokenServiceUrl = "/api/GetAzureMapsToken";
 
                 //    fetch(tokenServiceUrl).then(r => r.text()).then(token => resolve(token));
                 //}
