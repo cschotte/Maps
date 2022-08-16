@@ -1,4 +1,4 @@
-# Azure Maps Web Application Authentication the right way
+# Azure Maps Web Application Authentication
 
 One of the requirements when building a business application, which may give access to private business data, is that only authenticated employees or agents be able to see that data. So how can you use [Azure Maps](https://azuremaps.com/) in combination with authentication and authorization to ensure only the people that should be allowed have access?
 
