@@ -13,7 +13,7 @@ In this article, we use the following resources:
 * Before you can use Azure Maps, you will need to sign up for a free Azure subscription, at https://azure.microsoft.com/free
 * And finally, install the Azure Command-Line Interface (CLI) tools. Read here [How to install the Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli).
 
-## 1. Basic Web Application with Azure Maps
+## Step 1. Basic Web Application with Azure Maps
 
 Let's start with a basic .NET web application and Azure Maps. No authentication yet, that will come in the next paragraph. This first step will use an Azure Maps Key (a ‘shared Key authentication’ or subscription key) that should **not** be used in production. An Azure Maps Key has complete control over your Azure Maps resource. In the next paragraph, we will remove this key and replace this with managed identities for Azure resources.
 
@@ -112,7 +112,7 @@ dotnet run
 
 ![Azure Maps Key](images/azure_maps_key.png)
 
-## 2. Managed identities for Azure Maps
+## Step 2. Managed identities for Azure Maps
 
 In this paragraph, we are removing the ‘shared Key authentication’ (the Azure Maps subscription key) and replacing this with a more secure and production ready managed identities for Azure Maps.
 
@@ -223,7 +223,7 @@ az webapp deployment source config-zip -g rg-azuremaps -n web-azuremaps --src re
 
 2.12.	(Optional) We can also navigate to the token proxy API https://web-azuremaps.azurewebsites.net/api/GetAzureMapsToken, copy the token, and past this in the https://jwt.ms/ tool to decode and inspect the token.
 
-## 3. Protecting the web application and the Azure Maps token proxy API
+## Step 3. Protecting the web application and the Azure Maps token proxy API
 
 The web application we built in the last paragraph uses managed identities, and the Azure Maps Web Control uses the access token. Unfortunately, the web application and token proxy API are still accessible to everybody. Therefore, in this paragraph, we are adding the Azure Active Directory (AAD) Authentication to the web application and the token proxy API, so that only authenticated users can view the web application and use the Azure Maps Web Control in a secure way. 
 
@@ -369,6 +369,6 @@ az webapp deployment source config-zip -g rg-azuremaps -n web-azuremaps --src re
 az maps account update -n map-azuremaps -g rg-azuremaps --disable-local-auth true -s "G2"
 ```
 
-## 4. Conclusion
+## Conclusion
 
 When we have done all the steps in this step-by-step article, you have a protected web application in combination with Azure Maps that uses of Azure Active Directory, Azure role-based access control ([Azure RBAC](https://docs.microsoft.com/azure/role-based-access-control/overview)), and [Azure Maps tokens](https://docs.microsoft.com/azure/azure-maps/azure-maps-authentication). I recommend that you read our [Authentication best practices](https://docs.microsoft.com/azure/azure-maps/authentication-best-practices) and Azure Maps documentation. Also the [Azure Maps Samples](https://samples.azuremaps.com/) website offers so great ideas, with source code on Github, and uses most of the steps described in this article. Happy coding!
