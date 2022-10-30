@@ -8,7 +8,7 @@ Our [Azure Maps docs](https://docs.azuremaps.com/) describe in detail [many diff
 
 In this article, we use the following resources:
 
-* .NET 6.0 and the C# programming language. You can download, and install the latest version of .NET from https://dot.net/
+* .NET 7.0 and the C# programming language. You can download, and install the latest version of .NET from https://dot.net/
 * To make it easier to edit source code, we also recommend installing Visual Studio Code Edition, which is a lightweight but powerful source code editor from Microsoft https://code.visualstudio.com/
 * Before you can use Azure Maps, you will need to sign up for a free Azure subscription, at https://azure.microsoft.com/free
 * And finally, install the Azure Command-Line Interface (CLI) tools. Read here [How to install the Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli).
@@ -20,9 +20,8 @@ Let's start with a basic .NET web application and Azure Maps. No authentication 
 Create a folder, we called ours `AzureMapsDemo`, and add a new web application to it. Then open the newly created web application in Visual Studio Code. Start PowerShell (or any other terminal) and enter the following commands:
 
 ```cmd
-mkdir AzureMapsDemo
+dotnet new mvc -lang C# -n AzureMapsDemo -f net7.0
 cd .\AzureMapsDemo
-dotnet new mvc
 code .
 ```
 
