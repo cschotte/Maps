@@ -126,7 +126,7 @@ We start by creating an Azure Web App where our web application will be hosted a
 ```cmd
 az appservice plan create -g rg-azuremaps -n plan-azuremaps -l westeurope
 
-az webapp create -g rg-azuremaps -p plan-azuremaps -n web-azuremaps -r "dotnet:6"
+az webapp create -g rg-azuremaps -p plan-azuremaps -n web-azuremaps -r "dotnet:7"
 ```
 
 2.2 Next, we create a system-assigned identity for this web app. When finished, we are presented with the `principalId`, we need this in the next step. To make it simple, you can see the system-assigned identity as an account Azure manages.
