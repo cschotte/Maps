@@ -17,16 +17,19 @@ public class ApiController : Controller
     /// This tokenProvider will cache the token in memory, if you would like to reduce the dependency on Azure AD we recommend
     /// implementing a distributed cache combined with using the other methods available on tokenProvider.
     /// </remarks>
-    private static readonly DefaultAzureCredential tokenProvider = new();
+    private readonly DefaultAzureCredential _TokenProvider = new();
+
+    private readonly string[] _Scopes =
+    {
+            "https://atlas.microsoft.com/.default"
+    };
 
     public async Task<IActionResult> GetAzureMapsToken()
     {
         // Managed identities for Azure resources and Azure Maps
         // For the Web SDK to authorize correctly, you still must assign Azure role based access control for the managed identity
         // https://docs.microsoft.com/en-us/azure/azure-maps/how-to-manage-authentication
-        var accessToken = await tokenProvider.GetTokenAsync(
-            new TokenRequestContext(new[] { "https://atlas.microsoft.com/.default" })
-        );
+        AccessToken accessToken = await _TokenProvider.GetTokenAsync(new TokenRequestContext(_Scopes));
 
         return new OkObjectResult(accessToken.Token);
     }

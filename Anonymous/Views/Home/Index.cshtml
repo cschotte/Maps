@@ -11,8 +11,8 @@
 
 @section Scripts
     {
-    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" />
-    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
+    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.css" />
+    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.js"></script>
 
     <script>
         var map;
@@ -31,11 +31,17 @@
                 // Your Azure Maps client id for accessing your Azure Maps account.
                 clientId: '[YOUR_AZUREMAPS_CLIENT_ID]',
                 getToken: function (resolve, reject, map) {
-                    // URL to your authentication service that retrieves
-                    // an Azure Active Directory Token.
-                    var tokenServiceUrl = "/api/GetAzureMapsToken";
-
-                    fetch(tokenServiceUrl).then(r => r.text()).then(token => resolve(token));
+                    // URL to your authentication service that retrieves an Azure Active Directory Token
+                    fetch('/api/GetAzureMapsToken')
+                        .then(function (response) {
+                            return response.text();
+                        })
+                        .then(function (token) {
+                            resolve(token);
+                        })
+                        .catch(function (error) {
+                            reject(new Error(`Failed to fetch Azure Maps token: ${error.message}`));
+                        });
                 }
             }
         });

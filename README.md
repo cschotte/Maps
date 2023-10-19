@@ -162,13 +162,16 @@ namespace AzureMapsDemo.Controllers;
 
 public class ApiController : Controller
 {
-    private static readonly DefaultAzureCredential tokenProvider = new();
+    private readonly DefaultAzureCredential _TokenProvider = new();
+
+    private readonly string[] _Scopes =
+    {
+            "https://atlas.microsoft.com/.default"
+    };
 
     public async Task<IActionResult> GetAzureMapsToken()
     {
-        var accessToken = await tokenProvider.GetTokenAsync(
-            new TokenRequestContext(new[] { "https://atlas.microsoft.com/.default" })
-        );
+        AccessToken accessToken = await _TokenProvider.GetTokenAsync(new TokenRequestContext(_Scopes));
 
         return new OkObjectResult(accessToken.Token);
     }
@@ -184,12 +187,18 @@ authOptions: {
     authType: 'anonymous',
     // Your Azure Maps client id for accessing your Azure Maps account.
     clientId: '[YOUR_AZUREMAPS_CLIENT_ID]',
-    getToken: function(resolve, reject, map) {
-        // URL to your authentication service that retrieves
-        // an Azure Active Directory Token.
-        var tokenServiceUrl = "/api/GetAzureMapsToken";
-
-        fetch(tokenServiceUrl).then(r => r.text()).then(token => resolve(token));
+    getToken: function (resolve, reject, map) {
+        // URL to your authentication service that retrieves an Azure Active Directory Token
+        fetch('/api/GetAzureMapsToken')
+            .then(function (response) {
+                return response.text();
+            })
+            .then(function (token) {
+                resolve(token);
+            })
+            .catch(function (error) {
+                reject(new Error(`Failed to fetch Azure Maps token: ${error.message}`));
+            });
     }
 }
 ```
@@ -207,7 +216,7 @@ az maps account show -n map-azuremaps -g rg-azuremaps
 ```cmd
 dotnet publish --configuration Release
 
-Compress-Archive -Path bin\Release\net6.0\publish\* -DestinationPath release1.zip
+Compress-Archive -Path bin\Release\net7.0\publish\* -DestinationPath release1.zip
 ```
 
 2.10 Then we publish our release package to the Azure Web App.
@@ -349,7 +358,7 @@ az account tenant list
 ```cmd
 dotnet publish --configuration Release
 
-Compress-Archive -Path bin\Release\net6.0\publish\* -DestinationPath release2.zip
+Compress-Archive -Path bin\Release\net7.0\publish\* -DestinationPath release2.zip
 ```
 
 3.8 Then we publish our release package to the Azure Web App.
