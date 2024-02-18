@@ -8,7 +8,7 @@ Our [Azure Maps docs](https://docs.azuremaps.com/) describe in detail [many diff
 
 In this article, we use the following resources:
 
-* .NET 7.0 and the C# programming language. You can download, and install the latest version of .NET from https://dot.net/
+* .NET 8.0 and the C# programming language. You can download, and install the latest version of .NET from https://dot.net/
 * To make it easier to edit source code, we also recommend installing Visual Studio Code Edition, which is a lightweight but powerful source code editor from Microsoft https://code.visualstudio.com/
 * Before you can use Azure Maps, you will need to sign up for a free Azure subscription, at https://azure.microsoft.com/free
 * And finally, install the Azure Command-Line Interface (CLI) tools. Read here [How to install the Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli).
@@ -20,7 +20,7 @@ Let's start with a basic .NET web application and Azure Maps. No authentication 
 Create a folder, we called ours `AzureMapsDemo`, and add a new web application to it. Then open the newly created web application in Visual Studio Code. Start PowerShell (or any other terminal) and enter the following commands:
 
 ```cmd
-dotnet new mvc -lang C# -n AzureMapsDemo -f net7.0
+dotnet new mvc -lang C# -n AzureMapsDemo -f net8.0
 cd .\AzureMapsDemo
 code .
 ```
@@ -126,7 +126,7 @@ We start by creating an Azure Web App where our web application will be hosted a
 ```cmd
 az appservice plan create -g rg-azuremaps -n plan-azuremaps -l westeurope
 
-az webapp create -g rg-azuremaps -p plan-azuremaps -n web-azuremaps -r "dotnet:7"
+az webapp create -g rg-azuremaps -p plan-azuremaps -n web-azuremaps -r "dotnet:8"
 ```
 
 2.2 Next, we create a system-assigned identity for this web app. When finished, we are presented with the `principalId`, we need this in the next step. To make it simple, you can see the system-assigned identity as an account Azure manages.
@@ -216,7 +216,7 @@ az maps account show -n map-azuremaps -g rg-azuremaps
 ```cmd
 dotnet publish --configuration Release
 
-Compress-Archive -Path bin\Release\net7.0\publish\* -DestinationPath release1.zip
+Compress-Archive -Path bin\Release\net8.0\publish\* -DestinationPath release1.zip
 ```
 
 2.10 Then we publish our release package to the Azure Web App.
@@ -358,7 +358,7 @@ az account tenant list
 ```cmd
 dotnet publish --configuration Release
 
-Compress-Archive -Path bin\Release\net7.0\publish\* -DestinationPath release2.zip
+Compress-Archive -Path bin\Release\net8.0\publish\* -DestinationPath release2.zip
 ```
 
 3.8 Then we publish our release package to the Azure Web App.
